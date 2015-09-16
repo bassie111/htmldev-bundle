@@ -1,0 +1,24 @@
+{
+    "name": "zicht/htmldev-bundle",
+    "description": "Htmldev environment for Symfony",
+    "type": "symfony-bundle",
+    "repositories": { },
+    "authors": [
+        {
+            "name": "Zicht online",
+            "email": "info@zicht.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "*",
+        "symfony/routing": "*"
+    },
+    "bin": ["bin/htmldev.sh"],
+    "autoload": {
+        "psr-0": { "": ["src/"] }
+    },
+    "minimum-stability": "dev"
+}
