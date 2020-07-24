@@ -88,8 +88,13 @@
 
     @param string symbol The name of the SVG to load, without .svg extension.
     @param object options
+
+    @deprecated
 #}
 {% macro svg(name, options) %}
+    {% if app.debug %}
+        <div style="background-color:#d61;color:#fff;font-weight:600;padding:2px 6px;">Using {{ '{{' }} ui.svg() }} is deprecated. Use {{ '{%' }} apply inline_images %} instead.</div>
+    {% endif %}
     {% set default_options = {
         width: '',
         height: '',
