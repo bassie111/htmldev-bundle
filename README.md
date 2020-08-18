@@ -21,6 +21,7 @@ Create living Styleguides with Symfony and Twig! ✨
       - [Rendering components](#rendering-components)
       - [Rendering SVG files](#rendering-svg-files)
    - [Customising](#customising)
+   - [Alternative structure](#alternative-structure)
 - [Development](#development)
    - [CSS](#css)
 ---
@@ -323,17 +324,17 @@ You can override this page (see [Pages](#pages)) to customize the HTML specially
 
 #### Rendering components
 
-The HtmldevBundle provides a `component` macro to render components from the styleguide anywhere in your application.
+*Rendering components through the `component` macro (`ui.component()`) is deprecated*
+
+To render components, simply use a Twig  include like below:
 
 This wil load `htmldev/components/cards/cover.html.twig` with the given properties:
  
 ```twig
-{% import 'ZichtHtmldevBundle:macros:components.html.twig' as ui %}
-
-{{ ui.component('cards/cover', { 
+{% include '@htmldev/components/cards/cover.html.twig' with {
     title: 'Hodor',
     url: '/some/page'
-}) }}
+} only %}
 ```
 
 #### Rendering SVG files
@@ -395,6 +396,23 @@ There are several Symfony parameters available to override, to add a different i
 - `htmldev.svg_service`   
   The service that returns the contents of SVG files. To change the way this works, implement the `SvgServiceInterface` and
   change this parameter to your own class.
+
+### Alternative structure
+
+It is possible to move everything out of the HtmldevBundle's default htmldev/ directory by changing a few configurations.
+For instance, to adhere to a more industry standard structure in a Symfony 4+ project:
+
+Add to `config/packages/zicht_htmldev.yaml`:
+```yaml
+zicht_htmldev:
+    paths:
+        data: '%kernel.project_dir%/config/packages/_zicht_htmldev'
+        images_icons: '%kernel.project_dir%/assets/images/icons/'
+        sass_variables: '%kernel.project_dir%/assets/sass/variables/'
+        svg_service_base_dir: '%kernel.project_dir%/assets/'
+```
+
+And move stuff around accordingly.
 
 ## Development
 
